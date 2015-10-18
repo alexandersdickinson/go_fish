@@ -5,7 +5,7 @@ class Deck
     @deck = []
     @count = 52
     suits = %w(spades, clubs, diamonds, hearts)
-    values = ["Ace", 1, 2, 3, 4, 5, 6, 7, 8, 9, "Jack", "Queen", "King"]
+    values = ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"]
     suits.each() do |suit|
       values.each() do |value|
         card = Card.new({:suit => suit, :value => value})

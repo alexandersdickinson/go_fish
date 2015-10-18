@@ -5,12 +5,15 @@ label > input{
 
 label > input + div.card{
 	cursor:pointer;
-	border:2px solid transparent;
+}
+
+label > input:checked + div.card{
+  border:2px solid #f00;
 }
 
 .card{
 	width:168px;
-	height:246px;
+	height:243px;
 	background-image: url("../images/cards.png");
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -18,22 +21,209 @@ label > input + div.card{
 }
 
 #clubs-ace{
-	background-position: 0px 0px;
+	background-position: 0px -1px;
 }
 
 #clubs-2{
-	background-position: -169px 0px;
+	background-position: -167px -1px;
 }
 
 #clubs-3{
-	background-position: -337px 0px;
+	background-position: -335px -1px;
 }
 
 #clubs-4{
-	background-position: -504px 0px;
+	background-position: -502px -1px;
 }
 
 #clubs-5{
-	background-position: -672px 0px;
+	background-position: -670px -1px;
 }
 
+#clubs-6{
+	background-position: -837px -1px;
+}
+
+#clubs-7{
+	background-position: -1005px -1px;
+}
+
+#clubs-8{
+	background-position: -1172px -1px;
+}
+
+#clubs-9{
+	background-position: -1339px -1px;
+}
+
+#clubs-10{
+	background-position: -1507px -1px;
+}
+
+#clubs-jack{
+	background-position: -1675px -1px;
+}
+
+#clubs-queen{
+	background-position: -1842px -1px;
+}
+
+#clubs-king{
+	background-position: -2010px -1px;
+}
+
+#diamonds-ace{
+	background-position: 0px -244px;
+}
+
+#diamonds-2{
+	background-position: -167px -244px;
+}
+
+#diamonds-3{
+	background-position: -335px -244px;
+}
+
+#diamonds-4{
+	background-position: -502px -244px;
+}
+
+#diamonds-5{
+	background-position: -670px -244px;
+}
+
+#diamonds-6{
+	background-position: -837px -244px;
+}
+
+#diamonds-7{
+	background-position: -1005px -244px;
+}
+
+#diamonds-8{
+	background-position: -1172px -244px;
+}
+
+#diamonds-9{
+	background-position: -1339px -244px;
+}
+
+#diamonds-10{
+	background-position: -1507px -244px;
+}
+
+#diamonds-jack{
+	background-position: -1675px -244px;
+}
+
+#diamonds-queen{
+	background-position: -1842px -244px;
+}
+
+#diamonds-king{
+	background-position: -2010px -244px;
+}
+
+#hearts-ace{
+	background-position: 0px -487px;
+}
+
+#hearts-2{
+	background-position: -167px -487px;
+}
+
+#hearts-3{
+	background-position: -335px -487px;
+}
+
+#hearts-4{
+	background-position: -502px -487px;
+}
+
+#hearts-5{
+	background-position: -670px -487px;
+}
+
+#hearts-6{
+	background-position: -837px -487px;
+}
+
+#hearts-7{
+	background-position: -1005px -487px;
+}
+
+#hearts-8{
+	background-position: -1172px -487px;
+}
+
+#hearts-9{
+	background-position: -1339px -487px;
+}
+
+#hearts-10{
+	background-position: -1507px -487px;
+}
+
+#hearts-jack{
+	background-position: -1675px -487px;
+}
+
+#hearts-queen{
+	background-position: -1842px -487px;
+}
+
+#hearts-king{
+	background-position: -2010px -487px;
+}
+
+#spades-ace{
+	background-position: 0px -487px;
+}
+
+#spades-2{
+	background-position: -167px -730px;
+}
+
+#spades-3{
+	background-position: -335px -730px;
+}
+
+#spades-4{
+	background-position: -502px -730px;
+}
+
+#spades-5{
+	background-position: -670px -730px;
+}
+
+#spades-6{
+	background-position: -837px -730px;
+}
+
+#spades-7{
+	background-position: -1005px -730px;
+}
+
+#spades-8{
+	background-position: -1172px -730px;
+}
+
+#spades-9{
+	background-position: -1339px -730px;
+}
+
+#spades-10{
+	background-position: -1507px -730px;
+}
+
+#spades-jack{
+	background-position: -1675px -730px;
+}
+
+#spades-queen{
+	background-position: -1842px -730px;
+}
+
+#spades-king{
+	background-position: -2010px -730px;
+}
