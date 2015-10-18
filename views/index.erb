@@ -1,0 +1,14 @@
+<ul>
+	<%@games.each_with_index() do |game, i|%>
+		<h2><li>
+			<a href='/<%game.id()%>' class='btn btn-primary'>Game <%= i + 1%></a>
+		</li></h2>
+	<%end%>
+</ul>
+<form action='/new' method='post'>
+	<div class='form-group'>
+		<label for='player_count'>Number of Players</label>
+		<input id='player_count' name='player_count' type='number' class='form-control' min='2' max='10'>
+	</div>
+	<button class='btn btn-primary'>New Game</button>
+</form>

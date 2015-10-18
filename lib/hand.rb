@@ -1,17 +1,15 @@
-require('card')
-
 class Hand
-  attr_reader(:hand)
+  attr_reader(:cards)
   
   def initialize()
-    @hand = []
+    @cards = []
   end
   
   def add(card)
-    @hand.push(card)
+    @cards.push(card)
   end
   
   def remove(card)
-    @hand.delete(card)
+    @cards.delete(card)
   end
 end

@@ -7,7 +7,7 @@ describe(Hand) do
       test_card = Card.new({:value => "Ace", :suit => "Hearts"})
       test_hand = Hand.new()
       test_hand.add(test_card)
-      expect(test_hand.hand()[0]).to(eq(test_card))
+      expect(test_hand.cards()[0]).to(eq(test_card))
     end
   end
   
@@ -17,7 +17,7 @@ describe(Hand) do
       test_hand = Hand.new()
       test_hand.add(test_card)
       test_hand.remove(test_card)
-      expect(test_hand.hand()).to(eq([]))
+      expect(test_hand.cards()).to(eq([]))
     end
     
     it('returns the deleted card if it is found') do

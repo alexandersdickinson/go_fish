@@ -1,5 +1,3 @@
-require('card')
-
 class Deck
   attr_reader(:deck, :count)
   
@@ -22,6 +20,6 @@ class Deck
   end
   
   def shuffle()
-    @deck.shuffle()
+    @deck.shuffle!()
   end
 end

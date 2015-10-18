@@ -1,0 +1,9 @@
+<form action='/new/<%= @new_game.id()%>' method='post'>
+	<%@new_game.player_count().times() do |i|%>
+		<div class='form-group'>
+			<label for='player-name<%= i%>'>Player <%= i + 1%> Name</label>
+			<input id='player-name<%= i%>' name='player-name<%= i%>' class='form-control' type='text'>
+		</div>
+	<%end%>
+	<button type='submit' class='btn btn-primary'>Start Game</button>
+</form>
