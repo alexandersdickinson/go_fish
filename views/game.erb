@@ -1,216 +1,32 @@
-<form>
-	<div class='container-fluid'>
+<div class='container-fluid'>
+	<form action='/<%= @game.id()%>/result' method='post'>
+		<h2>Which card are you looking for?</h2>
 		<div class='form-group'>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-ace'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-2'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-3'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-4'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-5'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-6'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-7'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-8'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-9'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-10'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-jack'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-queen'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='clubs-king'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-ace'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-2'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-3'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-4'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-5'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-6'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-7'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-8'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-9'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-10'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-jack'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-queen'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='diamonds-king'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-ace'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-2'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-3'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-4'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-5'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-6'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-7'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-8'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-9'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-10'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-jack'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-queen'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='hearts-king'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-ace'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-2'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-3'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-4'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-5'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-6'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-7'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-8'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-9'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-10'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-jack'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-queen'></div>
-			</label>
-			<label class='radio-inline'>
-				<input type='radio' id='cards' name='test'>
-				<div class='card' id='spades-king'></div>
-			</label>
+			<%@current_player.hand().cards().each_with_index() do |card, i|%>
+				<label class='radio-inline'>
+					<input type='radio' name='player-card' class='card-input' value='<%= card.value().downcase()%>'
+					<%if i == 0%>
+						checked='checked'
+					<%end%>>
+					<div class='card' id='<%= card.suit().downcase()%>-<%= card.value().downcase()%>'></div>
+				</label>
+			<%end%>
 		</div>
-	</div>
-</form>
+		<h2>Whom would you like to ask?</h2>
+		<div class='form-group'>
+			<%@active_players.each_with_index() do |player, i|%>
+				<%next if player == @current_player%>
+				<label class='radio-inline'>
+					<input type='radio' name='target-player' value='<%= i%>'
+					<%if i == 0%>
+						checked='checked'
+					<%end%>>
+					<h3><%= player.name()%><br>Number of Cards: <%= player.hand().cards().length()%></h3>
+				</label>
+			<%end%>
+		</div>
+		<button type='submit' class='btn btn-primary'>Ask For Card</button>
+	</form>
 
-<a href='/' class='btn btn-primary'>Back</a>
+	<br><a href='/' class='btn btn-primary'>Back</a>
+</div>

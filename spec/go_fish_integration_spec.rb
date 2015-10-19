@@ -39,20 +39,43 @@ describe('the game creation path', :type => :feature) do
 end
 
 describe('the turn path', :type => :feature) do
-  it("it initially displays the player\'s cards face-down") do
-    
+  before() do
+    GoFishGame.clear()
   end
   
-  it("allows the player to flip their cards over") do
+  it("displays the player\'s hand") do
+    visit('/')
+    fill_in('player_count', :with => '2')
+    click_button("New Game")
+    fill_in('player-name0', :with => 'Ralph')
+    fill_in('player-name1', :with => 'Jim')
+    click_button('Start Game')
+    game = GoFishGame.all()[0]
+    game.current_player().hand().cards().each() do |card|
+      suit = card.suit()
+      value = card.value()
+      expect(page).to(have_css("##{suit.downcase()}-#{value.downcase()}"))
+    end
   end
   
   it('allows players to target one other player') do
+    visit('/')
+    fill_in('player_count', :with => '2')
+    click_button("New Game")
+    fill_in('player-name0', :with => 'Ralph')
+    fill_in('player-name1', :with => 'Jim')
+    click_button('Start Game')
+    expect(page).to(have_content("Jim"))
+    expect(page).to(have_content("Ask For Card"))
   end
   
-  it('allows players to select a card in their hand to ask the target player for') do
-  end
-  
-  it('displays the books in posession of the player') do
+  it('displays the books in posession of all players') do
+    visit('/')
+    fill_in('player_count', :with => '2')
+    click_button("New Game")
+    fill_in('player-name0', :with => 'Ralph')
+    fill_in('player-name1', :with => 'Jim')
+    click_button('Start Game')
   end
   
   it('displays appropriate information on the other players') do

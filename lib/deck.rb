@@ -4,8 +4,8 @@ class Deck
   def initialize()
     @deck = []
     @count = 52
-    suits = %w(spades, clubs, diamonds, hearts)
-    values = ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"]
+    suits = %w(Spades Clubs Diamonds Hearts)
+    values = %w(Ace 2 3 4 5 6 7 8 9 10 Jack Queen King)
     suits.each() do |suit|
       values.each() do |value|
         card = Card.new({:suit => suit, :value => value})

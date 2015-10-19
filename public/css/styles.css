@@ -1,14 +1,11 @@
-label > input{
+label > input.card-input[type='radio']{
 	visibility:hidden;
 	position:absolute;
 }
 
-label > input + div.card{
-	cursor:pointer;
-}
-
 label > input:checked + div.card{
-  border:2px solid #f00;
+	cursor:pointer;
+  	border:2px solid #f00;
 }
 
 .card{
@@ -18,6 +15,10 @@ label > input:checked + div.card{
 	background-repeat:no-repeat;
 	display:inline-block;
 	margin:5px;
+}
+
+input.face-down{
+	onclick:;
 }
 
 #clubs-ace{

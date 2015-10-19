@@ -8,7 +8,6 @@ class GoFishGame
     @deck = Deck.new()
     @deck.shuffle()
     @players = []
-    @eliminated_players = []
     @winner = []
     @player_count.times() { @players.push(GoFishPlayer.new(Hand.new())) }
     @active_players = @players

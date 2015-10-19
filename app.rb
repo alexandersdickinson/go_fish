@@ -25,12 +25,16 @@ post('/new/:id') do
   @game.players().each_index() do |i|
     @game.players()[i].name=(params.fetch("player-name#{i}"))
   end
+  @current_player = @game.current_player()
+  @active_players = @game.active_players()
   @header = "#{@game.current_player().name()}\'s Turn"
   erb(:game)
 end
 
-post('/:id') do
+post('/:id/form') do
   @game = GoFishGame.find(params.fetch('id').to_i())
+  @current_player = @game.current_player()
+  @active_players = @game.active_players()
   @header = "#{@game.current_player().name()}\'s Turn"
   erb(:game)
 end

@@ -1,7 +1,16 @@
 <ul>
 	<%@games.each_with_index() do |game, i|%>
 		<h2><li>
-			<a href='/<%game.id()%>' class='btn btn-primary'>Game <%= i + 1%></a>
+			<a href='/<%game.id()%>'>
+				<%if game.players().length() > 2%>
+					<%game.players()[(0..(game.players().length()) - 2)].each() do |player|%>
+						<%= "#{player.name()}, "%>
+					<%end%>
+					and <%= game.players()[-1].name()%>'s Game
+				<%else%>
+					<%=game.players()[0].name()%> and <%=game.players()[1].name()%>'s Game
+				<%end%>
+			</a>
 		</li></h2>
 	<%end%>
 </ul>
