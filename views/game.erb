@@ -4,7 +4,7 @@
 		<div class='form-group'>
 			<%@current_player.hand().cards().each_with_index() do |card, i|%>
 				<label class='radio-inline'>
-					<input type='radio' name='player-card' class='card-input' value='<%= card.value().downcase()%>'
+					<input type='radio' name='player-card' class='card-input' id='<%= card.suit().downcase()%>-<%= card.value().downcase()%>-radio' value='<%= card.value().downcase()%>'
 					<%if i == 0%>
 						checked='checked'
 					<%end%>>
@@ -12,16 +12,21 @@
 				</label>
 			<%end%>
 		</div>
+		<h2>Your books: <%= @current_player.books()%></h2>
 		<h2>Whom would you like to ask?</h2>
 		<div class='form-group'>
 			<%@active_players.each_with_index() do |player, i|%>
 				<%next if player == @current_player%>
 				<label class='radio-inline'>
-					<input type='radio' name='target-player' value='<%= i%>'
+					<input type='radio' name='target-player' id='<%= player.name()%>' value='<%= i%>'
 					<%if i == 0%>
 						checked='checked'
 					<%end%>>
-					<h3><%= player.name()%><br>Number of Cards: <%= player.hand().cards().length()%></h3>
+					<h3>
+						<%= player.name()%><br>
+						Number of Cards: <%= player.hand().cards().length()%><br>
+						Books: <%= player.books()%>
+					</h3>
 				</label>
 			<%end%>
 		</div>

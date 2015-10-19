@@ -1,7 +1,7 @@
 <ul>
 	<%@games.each_with_index() do |game, i|%>
 		<h2><li>
-			<a href='/<%game.id()%>'>
+			<a href='/<%= game.id()%>/form'>
 				<%if game.players().length() > 2%>
 					<%game.players()[(0..(game.players().length()) - 2)].each() do |player|%>
 						<%= "#{player.name()}, "%>
