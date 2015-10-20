@@ -158,8 +158,66 @@ describe('the turn path', :type => :feature) do
       end
       click_button("Ask For Card")
       break if player1 == game.current_player()
+      click_link("Go Fish")
       click_link("Continue")
     end
     expect(page).to(have_content("You retrieved #{card_count} card#{"s" if card_count > 1} with the value #{match_card.value()} from #{player2.name()}. Click continue to resume your turn."))
+  end
+  
+  it('goes fishing, and displays the caught card when the desired card is not found') do
+    visit('/')
+    fill_in('player_count', :with => '2')
+    click_button("New Game")
+    fill_in('player-name0', :with => 'Ralph')
+    fill_in('player-name1', :with => 'Jim')
+    click_button('Start Game')
+    bad_card = nil
+    game = GoFishGame.all()[0]
+    player1_values = []
+    player2_values = []
+    values = []
+    player1 = game.players()[0]
+    player2 = game.players()[1]
+    match_card = nil
+    loop do
+      player1_values = []
+      player1.hand().cards().each() do |card|
+        player1_values.push(card.value())
+      end
+      player1_values.uniq!()
+      player2_values = []
+      player2.hand().cards().each() do |card|
+        player2_values.push(card.value())
+      end
+      player2_values.uniq!()
+      values = player1_values - player2_values
+      break if values != []
+      matches = player1_values + player2_values
+      matches.uniq!
+      match_card = nil
+      player1.hand().cards().each() do |card|
+        if matches[0] == card.value()
+          match_card = card
+          break
+        end
+      end
+      choose("#{match_card.suit().downcase()}-#{match_card.value().downcase()}-radio")
+      choose("#{player2.name()}")
+      click_button("Ask For Card")
+      click_button("Continue")
+    end
+    player1.hand().cards().each() do |card|
+      if values[0] == card.value()
+        match_card = card
+        break
+      end
+    end
+    choose("#{match_card.suit().downcase()}-#{match_card.value().downcase()}-radio")
+    choose("#{player2.name()}")
+    click_button("Ask For Card")
+    click_button("Go Fish!")
+    fish = player1.hand().cards()[-1]
+    expect(page).to(have_content("You Caught a#{"n" if fish.value() == "8" || fish_value == "Ace"}"))
+    expect(page).to(have_css("##{fish.suit.downcase()}-#{fish.value.downcase()}"))
   end
 end
