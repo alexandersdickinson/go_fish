@@ -134,51 +134,32 @@ describe('the turn path', :type => :feature) do
     expect(page).to(have_content("No card with the value #{values[0]} was found. It is now Jim\'s turn."))
   end
   
-  it('informs the player that the desired card has been found') do
+  it('informs the player when they have retrieved the desired card') do
     visit('/')
     fill_in('player_count', :with => '2')
     click_button("New Game")
     fill_in('player-name0', :with => 'Ralph')
     fill_in('player-name1', :with => 'Jim')
     click_button('Start Game')
-    good_card = nil
     game = GoFishGame.all()[0]
-    player1_values = []
-    player2_values = []
-    values = []
     player1 = nil
     player2 = nil
+    match_card = nil
+    card_count = 0
     loop do
+      card_count = 0
       player1 = game.current_player()
       player2 = (game.players() - [player1])[0]
-      player1_values = []
-      player1.hand().cards().each() do |card|
-        player1_values.push(card.value())
-      end
-      player2.hand().cards().each() do |card|
-        player2_values.push(card.value())
-      end
-      values = player1_values & player2_values
-      break if values != []
-      choose("#{player1.hand.cards()[0].suit()}-#{player1.hand.cards()[0].value()}-radio")
+      match_card = player1.hand().cards()[0]
+      choose("#{match_card.suit().downcase()}-#{match_card.value().downcase()}-radio")
       choose("#{player2.name()}")
-      click_button("Ask For Card")
-      click_button("Continue")
-    end
-    match_card = nil
-    player1.hand().cards().each() do |card|
-      if values[0] == card.value()
-        match_card = card
-        break
+      player2.hand.cards().each() do |card|
+        card_count = card_count + 1 if match_card.value() == card.value()
       end
+      click_button("Ask For Card")
+      break if player1 == game.current_player()
+      click_link("Continue")
     end
-    card_count = 0
-    player2.hand.cards().each() do |card|
-      card_count = card_count + 1 if values[0] == card.value()
-    end
-    choose("#{match_card.suit().downcase()}-#{match_card.value().downcase()}-radio")
-    choose("#{player2.name()}")
-    click_button("Ask For Card")
-    expect(page).to(have_content("You retrieved #{card_count} cards with the value #{values[0]} from #{player2.name()}. Click continue to resume your turn."))
+    expect(page).to(have_content("You retrieved #{card_count} card#{"s" if card_count > 1} with the value #{match_card.value()} from #{player2.name()}. Click continue to resume your turn."))
   end
 end

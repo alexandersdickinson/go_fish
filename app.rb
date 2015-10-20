@@ -27,6 +27,8 @@ post('/new/:id') do
   end
   @current_player = @game.current_player()
   @active_players = @game.active_players()
+  current_player_index = @active_players.index(@current_player)
+  @checked_index = current_player_index == 0 ? 1 : 0
   @header = "#{@game.current_player().name()}\'s Turn"
   erb(:game)
 end
@@ -35,6 +37,8 @@ get('/:id/form') do
   @game = GoFishGame.find(params.fetch('id').to_i())
   @current_player = @game.current_player()
   @active_players = @game.active_players()
+  current_player_index = @active_players.index(@current_player)
+  @checked_index = current_player_index == 0 ? 1 : 0
   @header = "#{@game.current_player().name()}\'s Turn"
   erb(:game)
 end
@@ -50,7 +54,8 @@ post('/:id/result') do
   target_player_current_hand = target_player.hand().cards().length()
   current_player = @game.current_player()
   if current_player == last_current_player
-    @message = "You retrieved #{target_player_last_hand - target_player_current_hand} cards with the value #{target_card.value()} from #{target_player.name()}. Click continue to resume your turn."
+    cards_found = target_player_last_hand - target_player_current_hand
+    @message = "You retrieved #{cards_found} card#{"s" if cards_found > 1} with the value #{target_card.value()} from #{target_player.name()}. Click continue to resume your turn."
   else
     @message = "No card with the value #{target_card.value().capitalize()} was found. It is now #{current_player.name()}\'s turn."
   end

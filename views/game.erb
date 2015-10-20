@@ -17,9 +17,10 @@
 		<div class='form-group'>
 			<%@active_players.each_with_index() do |player, i|%>
 				<%next if player == @current_player%>
+				<% %>
 				<label class='radio-inline'>
 					<input type='radio' name='target-player' id='<%= player.name()%>' value='<%= i%>'
-					<%if i == 0%>
+					<%if i == @checked_index%>
 						checked='checked'
 					<%end%>>
 					<h3>

@@ -41,9 +41,6 @@ describe(GoFishGame) do
     end
   end
   
-  describe('.delete') do
-  end
-  
   describe('#player_count') do
     it('returns the number of players') do
       test_game = GoFishGame.new(3)
@@ -55,6 +52,15 @@ describe(GoFishGame) do
     it('assigns the first player in the list of players as the player with the first turn') do
       test_game = GoFishGame.new(3)
       expect(test_game.current_player()).to(eq(test_game.players()[0]))
+    end
+    
+    it("changes the current player to the next player in the players array when the current player\'s target card is not found") do
+      test_game = GoFishGame.new(2)
+      next_player = test_game.players()[1]
+      target_player = test_game.players()[1]
+      target_card = Card.new({:value => "Fake", :suit => "Clubs"})
+      test_game.turn(target_player, target_card)
+      expect(next_player).to(eq(test_game.current_player()))
     end
   end
   
