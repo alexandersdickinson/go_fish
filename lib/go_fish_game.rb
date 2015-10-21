@@ -23,32 +23,42 @@ class GoFishGame
   end
   
   def turn(target_player, target_card)
-    if @active_players.length() < 2
+    result = nil
+    target_value = target_card.value()
+    found_target = false
+    target_player.hand().cards().each() do |card|
+      if target_value == card.value()
+        @current_player.add_to_books(card)
+        target_player.hand().remove(card)
+        found_target = true
+        result = :card_found
+      end
+    end
+    if !found_target
+      @player_changes = @player_changes + 1
+      if @deck.count() > 0
+        @current_player.hand().add(@deck.draw())
+        result = :go_fish
+      end
+    end
+    eliminated_count = 0
+    if @current_player.hand().cards().length() == 0
+      @active_players.delete(@current_player)
+      eliminated_count += 1
+    end
+    if target_player.hand().cards().length() == 0
+      @active_players.delete(target_player)
+      eliminated_count += 1
+    end
+    @player_count -= eliminated_count
+    if @player_count < 2
       max_books = 0
       @players.each() { |player| max_books = player.books() if player.books() > max_books }
       @players.each() { |player| @winner.push(player) if player.books() == max_books }
-      return false
-    else
-      target_value = target_card.value()
-      found_target = false
-      target_player.hand().cards().each() do |card|
-        if target_value == card.value()
-          current_player.add_to_books(card)
-          target_player.hand().remove(card)
-          found_target = true
-        end
-      end
-      if !found_target
-        @player_changes = @player_changes + 1
-        if @deck.count() > 0
-          @current_player.hand().add(@deck.draw())
-        else
-          @active_players.delete(@current_player)
-          @player_count = @player_count - 1
-        end
-        @current_player = @active_players[(@player_changes % @player_count)]
-      end
+      return result = :game_over
     end
+    @current_player = @active_players[(@player_changes % @player_count)]
+    return result
   end
   
   def self.all()

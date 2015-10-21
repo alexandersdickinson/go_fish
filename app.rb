@@ -47,18 +47,27 @@ post('/:id/result') do
   @header = "Result"
   @game = GoFishGame.find(params.fetch('id').to_i())
   last_current_player = @game.current_player()
-  target_card = Card.new({:suit => "Spades", :value => params.fetch('player-card')})
+  target_card = Card.new({:suit => "Spades", :value => params.fetch('player-card').capitalize()})
   target_player = @game.players()[params.fetch('target-player').to_i()]
   target_player_last_hand = target_player.hand().cards().length()
-  @game.turn(target_player, target_card)
+  @result = @game.turn(target_player, target_card)
   target_player_current_hand = target_player.hand().cards().length()
-  current_player = @game.current_player()
-  if current_player == last_current_player
+  @current_player = @game.current_player()
+  if @current_player == last_current_player
     cards_found = target_player_last_hand - target_player_current_hand
     @message = "You retrieved #{cards_found} card#{"s" if cards_found > 1} with the value #{target_card.value()} from #{target_player.name()}. Click continue to resume your turn."
+    @fish = false
   else
-    @message = "No card with the value #{target_card.value().capitalize()} was found. It is now #{current_player.name()}\'s turn."
+    @message = "No card with the value #{target_card.value().capitalize()} was found. It is now #{@current_player.name()}\'s turn."
+    @fish = true
   end
   @card_found
   erb(:result)
+end
+
+post('/:id/go_fish') do
+  @game = GoFishGame.find(params.fetch('id').to_i())
+  @card = @game.players()[params.fetch('current-player').to_i()].hand().cards()[-1]
+  @header = "You Caught a#{"n" if @card.value() == "8" || @card.value() == "Ace"}..."
+  erb(:go_fish)
 end
