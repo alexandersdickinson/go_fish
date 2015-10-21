@@ -42,11 +42,11 @@ class GoFishGame
       end
     end
     eliminated_count = 0
-    if @current_player.hand().cards().length() == 0
+    if @current_player.hand().cards().length() == 0 && @deck.count() > 0
       @active_players.delete(@current_player)
       eliminated_count += 1
     end
-    if target_player.hand().cards().length() == 0
+    if target_player.hand().cards().length() == 0 && @deck.count() > 0
       @active_players.delete(target_player)
       eliminated_count += 1
     end

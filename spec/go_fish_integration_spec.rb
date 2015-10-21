@@ -192,4 +192,7 @@ describe('the turn path', :type => :feature) do
     expect(page).to(have_content("You Caught a#{"n" if fish.value() == "8" || fish.value() == "Ace"}..."))
     expect(page).to(have_css("##{fish.suit.downcase()}-#{fish.value.downcase()}"))
   end
+  
+  it('informs players when they have been eliminated from play') do
+  end
 end

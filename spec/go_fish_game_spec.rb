@@ -154,6 +154,9 @@ describe(GoFishGame) do
       expect(test_game.current_player().books() > 0).to(eq(true))
     end
     
+    it("gives 5 cards to players whose hands have emptied if there are still cards in the deck") do
+    end
+    
     it("eliminates players that have empty hands when all cards have been drawn from the deck") do
       test_game = GoFishGame.new(3)
       false_card = Card.new({:value => "Fake", :suit => "Spades"})
@@ -161,7 +164,7 @@ describe(GoFishGame) do
       player2 = test_game.players()[1]
       player3 = test_game.players()[2]
       target_card = nil
-      while player3.hand().cards().length() > 0
+      while player3.hand().cards().length() > 0 && test_game.deck().count() > 0
         if test_game.current_player() == player1 || test_game.current_player() == player2
           found_card = false
           test_game.current_player().hand().cards().each() do |card1|
@@ -188,16 +191,16 @@ describe(GoFishGame) do
     end
     
     it("it ends the game when all players but one are eliminated") do
-      test_game = GoFishGame.new(10)
+      test_game = GoFishGame.new(2)
       result = nil
-      player10 = test_game.players()[1]
+      player2 = test_game.players()[1]
       false_card = Card.new({:value => "Fake", :suit => "Spades"})
       target_card = nil
       while result != :game_over
-        if test_game.current_player() != player10
+        if test_game.current_player() != player2
           found_card = false
           test_game.current_player().hand().cards().each() do |card1|
-            player10.hand().cards().each() do |card2|
+            player2.hand().cards().each() do |card2|
               if card1.value() == card2.value()
                 target_card = card1
                 found_card = true
@@ -207,9 +210,9 @@ describe(GoFishGame) do
             break if found_card
           end
           if found_card
-            result = test_game.turn(player10, target_card)
+            result = test_game.turn(player2, target_card)
           else
-            result = test_game.turn(player10, false_card)
+            result = test_game.turn(player2, false_card)
           end
         else
           result = test_game.turn(test_game.active_players()[0], false_card)
