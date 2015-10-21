@@ -154,17 +154,15 @@ describe(GoFishGame) do
       expect(test_game.current_player().books() > 0).to(eq(true))
     end
     
-    it("gives 5 cards to players whose hands have emptied if there are still cards in the deck") do
-    end
-    
-    it("eliminates players that have empty hands when all cards have been drawn from the deck") do
+    it("gives up to 5 cards to players whose hands have emptied if there are still cards in the deck") do
       test_game = GoFishGame.new(3)
       false_card = Card.new({:value => "Fake", :suit => "Spades"})
       player1 = test_game.players()[0]
       player2 = test_game.players()[1]
       player3 = test_game.players()[2]
       target_card = nil
-      while player3.hand().cards().length() > 0 && test_game.deck().count() > 0
+      result = nil
+      while result != :replenish_cards
         if test_game.current_player() == player1 || test_game.current_player() == player2
           found_card = false
           test_game.current_player().hand().cards().each() do |card1|
@@ -178,12 +176,48 @@ describe(GoFishGame) do
             break if found_card
           end
           if found_card
-            result = test_game.turn(player3, target_card)
+            test_game.turn(player3, target_card)
           else
-            result = test_game.turn(player3, false_card)
+            test_game.turn(player3, false_card)
           end
         else
-          test_game.turn(player1, false_card)
+          result = test_game.turn(player1, false_card)
+        end
+      end
+      expect(player3.hand().cards().length()).not_to(eq(0))
+    end
+    
+    it("eliminates players that have empty hands when all cards have been drawn from the deck") do
+      test_game = GoFishGame.new(3)
+      false_card = Card.new({:value => "Fake", :suit => "Spades"})
+      player1 = test_game.players()[0]
+      player2 = test_game.players()[1]
+      player3 = test_game.players()[2]
+      target_card = nil
+      while test_game.deck().count > 0
+        target_player = (test_game.active_players() - [test_game.current_player()])[0]
+        test_game.turn(target_player, false_card)
+      end
+      while player3.hand().cards().length() > 0
+        if test_game.current_player() != player3
+          found_card = false
+          test_game.current_player().hand().cards().each() do |card1|
+            player3.hand().cards().each() do |card2|
+              if card1.value() == card2.value()
+                target_card = card1
+                found_card = true
+                break
+              end
+            end
+            break if found_card
+          end
+          if found_card
+            test_game.turn(player3, target_card)
+          else
+            test_game.turn(player3, false_card)
+          end
+        else
+          test_game.turn(player1, test_game.current_player().hand().cards()[0])
         end
       end
       expect(test_game.active_players().length()).to(eq(2))
