@@ -28,6 +28,8 @@ class GoFishGame
         break if @deck.count() == 0
         @current_player.hand().add(@deck.draw())
       end
+      @player_changes += 1
+      @current_player = @active_players[(@player_changes % @player_count)]
       return :replenish_cards
     end
     result = nil
@@ -42,7 +44,7 @@ class GoFishGame
       end
     end
     if !found_target
-      @player_changes = @player_changes + 1
+      @player_changes += 1
       if @deck.count() > 0
         @current_player.hand().add(@deck.draw())
         result = :go_fish
