@@ -193,6 +193,73 @@ describe('the turn path', :type => :feature) do
     expect(page).to(have_css("##{fish.suit.downcase()}-#{fish.value.downcase()}"))
   end
   
+  it('gives players without cards in their hand 5 cards while there are cards left in the deck') do
+    visit('/')
+    fill_in('player_count', :with => '3')
+    click_button("New Game")
+    fill_in('player-name0', :with => 'Ralph')
+    fill_in('player-name1', :with => 'Jim')
+    fill_in('player-name2', :with => 'Larry')
+    click_button('Start Game')
+    game = GoFishGame.all()[0]
+    target_card = nil
+    target_player = game.players()[-1]
+    while target_player.hand().cards().length() > 0
+      if game.current_player() != target_player
+        found_card = false
+        game.current_player().hand().cards().each() do |card1|
+          target_player.hand().cards().each() do |card2|
+            if card1.value() == card2.value()
+              target_card = card1
+              found_card = true
+              break
+            end
+          end
+          break if found_card
+        end
+        if found_card
+          choose("#{target_card.suit().downcase()}-#{target_card.value().downcase()}-radio")
+          choose("#{target_player.name()}")
+          click_button("Ask For Card")
+          click_link("Continue")
+        else
+          card = game.current_player().hand().cards()[0]
+          choose("#{card.suit().downcase()}-#{card.value().downcase()}-radio")
+          choose("#{target_player.name()}")
+          click_button("Ask For Card")
+          click_button("Go Fish!")
+          click_link("Continue")
+        end
+      else
+        mismatch = false
+        game.current_player().hand().cards().each() do |card1|
+          game.players()[0].hand().cards().each() do |card2|
+            if card1.value() != card2.value()
+              target_card = card1
+              mismatch = true
+              break
+            end
+          end
+          break if mismatch
+        end
+        if mismatch
+          choose("#{target_card.suit().downcase()}-#{target_card.value().downcase()}-radio")
+          choose("#{target_player.name()}")
+          click_button("Ask For Card")
+          click_button("Go Fish!")
+          click_link("Continue")
+        else
+          card = game.current_player().hand().cards()[0]
+          choose("#{card.suit().downcase()}-#{card.value().downcase()}-radio")
+          choose("#{target_player.name()}")
+          click_button("Ask For Card")
+          click_link("Continue")
+        end
+      end
+      expect(page).to(have_content("Your Hand was Empty...Here are some more cards:"))
+    end
+  end
+  
   # it('informs players when they have been eliminated from play') do
 #     visit('/')
 #     fill_in('player_count', :with => '2')
@@ -206,6 +273,7 @@ describe('the turn path', :type => :feature) do
 #     target_card = nil
 #     loop do
 #       player1 = game.current_player()
+#       break if player1.hand().cards().length() == 0 && game.deck().count == 0
 #       player2 = (game.active_players() - [player1])[0]
 #       if player1.hand().cards().length() == 0
 #         if game.deck().count() == 0
