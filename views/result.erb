@@ -1,9 +1,9 @@
 <h2><%= @message%></h2>
 <%if @fish%>
 	<form action='/<%= @game.id()%>/go_fish' method='post'>
-		<input type='hidden' name='current-player' value='<%= @game.players().index(@current_player)%>'>
-		<button class='btn btn-primary'>Go Fish!</a>
+		<input type='hidden' name='current-player' value='<%= @game.active_players().index(@current_player)%>'>
+		<button class='btn btn-primary' autofocus>Go Fish!</a>
 	</form>
 <%else%>
-	<a href='/<%= @game.id()%>/form' class='btn btn-primary'>Continue</a>
+	<a href='/<%= @game.id()%>/form' class='btn btn-primary' autofocus>Continue</a>
 <%end%>

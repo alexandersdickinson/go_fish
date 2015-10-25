@@ -1,10 +1,13 @@
 <div class='container-fluid'>
+	<%if @message != nil%>
+		<h2><%= @message%></h2>
+	<%end%>
 	<form action='/<%= @game.id()%>/result' method='post'>
 		<h2>Which card are you looking for?</h2>
 		<div class='form-group'>
 			<%@current_player.hand().cards().each_with_index() do |card, i|%>
 				<label class='radio-inline'>
-					<input type='radio' name='player-card' class='card-input' id='<%= card.suit().downcase()%>-<%= card.value().downcase()%>-radio' value='<%= card.value().downcase()%>'
+					<input type='radio' name='player-card' class='card-input' id='<%= card.suit().downcase()%>-<%= card.value()%>-radio' value='<%= card.value()%>'
 					<%if i == 0%>
 						checked='checked'
 					<%end%>>
@@ -31,7 +34,7 @@
 				</label>
 			<%end%>
 		</div>
-		<button type='submit' class='btn btn-primary'>Ask For Card</button>
+		<button type='submit' class='btn btn-primary' autofocus>Ask For Card</button>
 	</form>
 
 	<br><a href='/' class='btn btn-primary'>Back</a>

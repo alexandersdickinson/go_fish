@@ -1,0 +1,13 @@
+<h2>Winners:</h2>
+<ul>
+	<%@game.winner().each() do |winner|%>
+		<h2><li>
+			<%= winner.name()%>
+		</li></h2>
+	<%end%>
+</ul>
+
+<form action='/' method='post'>
+	<input type='hidden' name='id' value='<%= @game.id()%>'>
+	<button class='btn btn-primary'>Back</button>
+</form>

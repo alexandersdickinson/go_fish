@@ -23,13 +23,12 @@ class GoFishGame
   end
   
   def turn(target_player, target_card)
-    if @current_player.hand().cards().length() == 0
+    if @current_player.hand().cards().length() == 0 && @deck.count() > 0
       5.times() do
         break if @deck.count() == 0
         @current_player.hand().add(@deck.draw())
       end
-      @player_changes += 1
-      @current_player = @active_players[(@player_changes % @player_count)]
+      @current_player.add_to_books()
       return :replenish_cards
     end
     result = nil
@@ -37,16 +36,18 @@ class GoFishGame
     found_target = false
     target_player.hand().cards().each() do |card|
       if target_value == card.value()
-        @current_player.add_to_books(card)
+        @current_player.hand().add(card)
         target_player.hand().remove(card)
         found_target = true
         result = :card_found
       end
     end
+    @current_player.add_to_books()
     if !found_target
       @player_changes += 1
       if @deck.count() > 0
         @current_player.hand().add(@deck.draw())
+        @current_player.add_to_books()
         result = :go_fish
       end
     end
@@ -80,6 +81,10 @@ class GoFishGame
   
   def self.clear()
     @@games = []
+  end
+  
+  def self.delete(game)
+    @@games.delete(game)
   end
   
   def self.find(id)
